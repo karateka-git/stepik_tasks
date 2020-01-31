@@ -1,9 +1,18 @@
+import java.math.BigInteger
+
 fun main() {
-    println(task1())
-    println(task2(listOf("5", "4", "3", "2", "1", "6", "7", "8", "9", "10")).map{it})
-    task3(7)
-    println(useTask4())
-    println(task5(listOf("5", "4", "3", "2", "1", "6", "7", "8", "9", "10")))
+//    println(task1())
+//    println(task2(listOf("5", "4", "3", "2", "1", "6", "7", "8", "9", "10")).map{it})
+//    task3(7)
+//    println(useTask4())
+//    println(task5(listOf("5", "4", "3", "2", "1", "6", "7", "8", "9", "10")))
+//    task6()
+//    println(task7(listOf(1, 2, 4, 3, 2, 1, 5)))
+//    println(task7(listOf()))
+    task8(arrayOf(
+        "64361863847308796002886528604013323768035602644",
+        "60587804274606460837016609279605443939335348830",
+        "22095112273333910450241918992726924732820572493"))
 }
 
 // hello world
@@ -53,3 +62,43 @@ fun useTask4() = listOf(
 )
 
 fun task5(options: Collection<String>) = options.joinToString(prefix = "[", postfix = "]")
+
+fun task6() {
+    val input = readLine()!!
+    val outputChar = ArrayList<String>()
+    var count = 1
+    var old = input[0]
+    for (i in 1 until input.length) {
+        if (old == input[i]) {
+            count++
+        } else {
+            outputChar.add(old.toString())
+            outputChar.add("$count")
+            count = 1
+            old = input[i]
+        }
+    }
+    outputChar.add(old.toString())
+    outputChar.add("$count")
+    println(outputChar.joinToString(separator = ""))
+}
+
+// toJson
+fun task7(collection: Collection<Int>): String = collection.joinToString(separator = ", ", prefix = "[", postfix = "]")
+
+fun task8(array: Array<String>) {
+    var sum:BigInteger = BigInteger.valueOf(0)
+    while(true) {
+        val str: String = readLine()?:return
+        if (str.isEmpty()) {
+            println(if (sum.toString().length > 9) {
+                sum.toString().substring(range = 0..9)
+            } else {
+                sum.toString()
+            })
+            return
+        }
+        sum += str.toBigInteger()
+    }
+}
+

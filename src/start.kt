@@ -1,4 +1,6 @@
 import java.math.BigInteger
+import java.util.*
+import kotlin.collections.ArrayList
 
 fun main() {
 //    println(task1())
@@ -9,10 +11,11 @@ fun main() {
 //    task6()
 //    println(task7(listOf(1, 2, 4, 3, 2, 1, 5)))
 //    println(task7(listOf()))
-    task8(arrayOf(
-        "64361863847308796002886528604013323768035602644",
-        "60587804274606460837016609279605443939335348830",
-        "22095112273333910450241918992726924732820572493"))
+//    task8(arrayOf(
+//        "64361863847308796002886528604013323768035602644",
+//        "60587804274606460837016609279605443939335348830",
+//        "22095112273333910450241918992726924732820572493"))
+    task9()
 }
 
 // hello world
@@ -99,6 +102,32 @@ fun task8(array: Array<String>) {
             return
         }
         sum += str.toBigInteger()
+    }
+}
+
+fun task9() {
+    var inputStr: String = readLine()?:return
+    inputStr = inputStr.reversed()
+    while (inputStr.length % 4 != 0) {
+        inputStr += (0);
+    }
+    val inputInt = inputStr.map{it.toInt() - '0'.toInt()}
+    var outputStr = ""
+    for (i in inputInt.indices step 4) {
+        outputStr += (getHexSymbol(inputInt[i] + inputInt[i+1] * 2 + inputInt[i+2] * 4 + inputInt[i+3] * 8))
+    }
+    print(outputStr.reversed())
+}
+
+fun getHexSymbol(e: Int): String {
+    return when (e) {
+        10 -> "A"
+        11 -> "B"
+        12 -> "C"
+        13 -> "D"
+        14 -> "E"
+        15 -> "F"
+        else -> e.toString()
     }
 }
 

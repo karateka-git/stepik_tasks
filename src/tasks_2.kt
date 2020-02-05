@@ -1,6 +1,3 @@
-import java.math.RoundingMode
-import kotlin.math.floor
-
 fun main(args: Array<String>) {
     // task1()
     // task2("Anna Ben Alex Anna Peter Jack Ben".split(" "))
@@ -9,7 +6,9 @@ fun main(args: Array<String>) {
 //        print("${el[0]}\n")
 //    }
 //    task5("абракадабраабракадабра", "абракадабра")
-    print(task6("Rail safety", "Fairy tales"))
+//    print(task6("Rail safety", "Fairy tales"))
+    //print(getNextPermutation(intArrayOf(1,2,3)).joinToString(" ", "", ""))
+    print(task7(4).joinToString(" ", "", ""))
 }
 
 fun task1() {
@@ -73,4 +72,30 @@ fun task6(s1: String, s2: String) : Boolean {
         if (!s2Chars.contains(i)) return false
     }
     return true
+}
+
+fun getNextPermutation(sequence: IntArray) : IntArray {
+    var i = sequence.size - 2
+    while (i >= 0 && sequence[i+1] <= sequence[i]) {
+        i--
+    }
+    if (i>=0) {
+        var j = sequence.size - 1
+        while (j >= 0 && sequence[j] <= sequence[i]) {
+            j--
+        }
+        val tmp = sequence[j]
+        sequence[j] = sequence[i]
+        sequence[i] = tmp
+    }
+    sequence.sort(i+1)
+    return sequence
+}
+
+fun task7(count: Int) : IntArray {
+    var sequenceResult = intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+    for (i in 1..count) {
+        sequenceResult = getNextPermutation(sequenceResult)
+    }
+    return sequenceResult
 }

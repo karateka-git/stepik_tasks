@@ -8,7 +8,8 @@ fun main(args: Array<String>) {
 //    for (el in resultTask4) {
 //        print("${el[0]}\n")
 //    }
-    task5("абракадабраабракадабра", "абракадабра")
+//    task5("абракадабраабракадабра", "абракадабра")
+    print(task6("Rail safety", "Fairy tales"))
 }
 
 fun task1() {
@@ -62,4 +63,14 @@ fun task5(text: String, substring: String) : MutableList<Int> {
     }
     print(output.joinToString (" ", "", ""))
     return output
+}
+
+fun task6(s1: String, s2: String) : Boolean {
+    val s2Chars = s2.toLowerCase().replace(" ", "").toCharArray()
+    val s1Chars = s1.toLowerCase().replace(" ", "").toCharArray()
+    if (s1Chars.size != s2Chars.size) return false
+    for (i in s1Chars) {
+        if (!s2Chars.contains(i)) return false
+    }
+    return true
 }

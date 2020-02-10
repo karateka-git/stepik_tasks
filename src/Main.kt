@@ -2,7 +2,8 @@ import kotlin.math.pow
 
 fun main(args : Array<String>) {
 //    task1()
-      task2()
+//    task2()
+      task3()
 }
 
 fun task1() {
@@ -22,4 +23,9 @@ fun task2() {
     val knot = readLine()?.toDouble()?.times(STANDART_KNOT)?:return
     val km = (knot / STANDART_KM)
     print("$knot / $STANDART_KM = $km")
+}
+
+fun task3() {
+    val inputStr = readLine()?.toList()?: return
+    println(inputStr.joinToString(" "))
 }

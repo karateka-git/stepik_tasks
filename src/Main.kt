@@ -57,6 +57,7 @@ interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
 
+// Destructuring Declarations
 fun task6(date: MyDate): Boolean {
 
     val (year, month, dayOfMonth) = date
@@ -65,3 +66,5 @@ fun task6(date: MyDate): Boolean {
 }
 
 data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)
+
+

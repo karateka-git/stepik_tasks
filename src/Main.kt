@@ -29,3 +29,19 @@ fun task3() {
     val inputStr = readLine()?.toList()?: return
     println(inputStr.joinToString(" "))
 }
+
+fun task4(client: Client?, message: String?, mailer: Mailer) {
+    if (message == null) {
+        return
+    }
+    val personalInfo = client?.personalInfo?:return
+    val email = personalInfo.email?:return
+    mailer.sendMessage(email, message);
+
+}
+
+class Client (val personalInfo: PersonalInfo?)
+class PersonalInfo (val email: String?)
+interface Mailer {
+    fun sendMessage(email: String, message: String)
+}

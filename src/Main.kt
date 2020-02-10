@@ -45,3 +45,14 @@ class PersonalInfo (val email: String?)
 interface Mailer {
     fun sendMessage(email: String, message: String)
 }
+
+fun task5(expr: Expr): Int =
+    when (expr) {
+        is Num -> expr.value
+        is Sum -> task5(expr.left) + task5(expr.right)
+        else -> throw IllegalArgumentException("Unknown expression")
+    }
+
+interface Expr
+class Num(val value: Int) : Expr
+class Sum(val left: Expr, val right: Expr) : Expr

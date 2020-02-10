@@ -56,3 +56,12 @@ fun task5(expr: Expr): Int =
 interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Expr, val right: Expr) : Expr
+
+fun task6(date: MyDate): Boolean {
+
+    val (year, month, dayOfMonth) = date
+
+    return year % 4 == 0 && month == 2 && dayOfMonth == 29
+}
+
+data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)

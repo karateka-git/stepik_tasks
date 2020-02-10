@@ -1,6 +1,8 @@
+import kotlin.math.pow
+
 fun main(args : Array<String>) {
-    task1()
-    task2()
+//    task1()
+      task2()
 }
 
 fun task1() {
@@ -12,4 +14,12 @@ fun task1() {
     days = hours / 24
     hours -= days*24
     print("days: $days\nhours: $hours")
+}
+
+fun task2() {
+    val STANDART_KNOT = 1852
+    val STANDART_KM = 1000
+    val knot = readLine()?.toDouble()?.times(STANDART_KNOT)?:return
+    val km = (knot / STANDART_KM)
+    print("$knot / $STANDART_KM = $km")
 }

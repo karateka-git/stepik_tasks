@@ -3,7 +3,7 @@ fun main(vararg args: String) {
 //    task1()
 //    task2()
 //    task3()
-    task7()
+    task8()
 }
 
 fun task1() {
@@ -68,16 +68,43 @@ fun task6(date: MyDate): Boolean {
 data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)
 
 
-fun task7() {
-    var input = readLine()?.split(" ")?.toList()?:return
+fun task8() {
+    val input = readLine()?:return
+    println(calculate(input))
+}
 
-    input = calculateOperationInList(input, listOf("*", "/"))
-    input = calculateOperationInList(input, listOf("+", "-"))
-    println(input.first())
+fun calculate(input: String): String {
+    var subString: String = input
+    if (input.contains("(")) {
+        val startSubExp = input.indexOf("(")+1
+        val endSubExp = startSubExp + getEndSubExp(input.substring(startSubExp))
+        subString = input.substring(0, startSubExp - 1) +
+                calculate(input.substring(startSubExp, endSubExp)) +
+                input.substring(endSubExp + 1, input.length)
+    }
+    var output = subString.split(" ")
+    output = calculateOperationInList(output, listOf("*", "/"))
+    output = calculateOperationInList(output, listOf("+", "-"))
+    return output.first()
+}
+
+fun getEndSubExp(sub: String): Int {
+    var count = 0
+    for ((key, i) in sub.withIndex()) {
+        if (i.toString() == "(")
+            count += 1
+        if (i.toString() == ")" && count > 0) {
+            count -= 1
+        }
+        if (i.toString() == ")" && count == 0) {
+            return key
+        }
+    }
+    throw Exception("error in input expression")
 }
 
 fun calculateOperationInList(input: List<String>, operations: List<String>): List<String> {
-    fun perform(op1: Int, operation: String, op2: Int): Int? {
+    fun perform(op1: Double, operation: String, op2: Double): Double? {
         return when (operation) {
             "-" -> op1 - op2
             "+" -> op1 + op2
@@ -90,9 +117,9 @@ fun calculateOperationInList(input: List<String>, operations: List<String>): Lis
     var key = 0
     while (key < output.size) {
         key += if (output[key] in operations) {
-            val op2 = output.removeAt(key + 1).toInt()
+            val op2 = output.removeAt(key + 1).toDouble()
             val operation = output.removeAt(key)
-            val op1 = output.removeAt(key - 1).toInt()
+            val op1 = output.removeAt(key - 1).toDouble()
             val res = perform(op1, operation, op2) ?: throw Exception()
             output.add(key-1, res.toString())
             0

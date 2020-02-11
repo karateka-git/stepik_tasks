@@ -1,9 +1,9 @@
-import kotlin.math.pow
 
-fun main(args : Array<String>) {
+fun main(vararg args: String) {
 //    task1()
 //    task2()
-      task3()
+//    task3()
+    task7()
 }
 
 fun task1() {
@@ -67,4 +67,39 @@ fun task6(date: MyDate): Boolean {
 
 data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int)
 
+
+fun task7() {
+    var input = readLine()?.split(" ")?.toList()?:return
+
+    input = calculateOperationInList(input, listOf("*", "/"))
+    input = calculateOperationInList(input, listOf("+", "-"))
+    println(input.first())
+}
+
+fun calculateOperationInList(input: List<String>, operations: List<String>): List<String> {
+    fun perform(op1: Int, operation: String, op2: Int): Int? {
+        return when (operation) {
+            "-" -> op1 - op2
+            "+" -> op1 + op2
+            "*" -> op1 * op2
+            "/" -> op1 / op2
+            else -> null
+        }
+    }
+    val output = input.toMutableList()
+    var key = 0
+    while (key < output.size) {
+        key += if (output[key] in operations) {
+            val op2 = output.removeAt(key + 1).toInt()
+            val operation = output.removeAt(key)
+            val op1 = output.removeAt(key - 1).toInt()
+            val res = perform(op1, operation, op2) ?: throw Exception()
+            output.add(key-1, res.toString())
+            0
+        } else {
+            1
+        }
+    }
+    return output
+}
 

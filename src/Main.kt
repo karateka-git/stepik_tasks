@@ -104,13 +104,13 @@ fun getEndSubExp(sub: String): Int {
 }
 
 fun calculateOperationInList(input: List<String>, operations: List<String>): List<String> {
-    fun perform(op1: Double, operation: String, op2: Double): Double? {
+    fun perform(op1: Double, operation: String, op2: Double): Double {
         return when (operation) {
             "-" -> op1 - op2
             "+" -> op1 + op2
             "*" -> op1 * op2
             "/" -> op1 / op2
-            else -> null
+            else -> throw Exception()
         }
     }
     val output = input.toMutableList()
@@ -120,7 +120,7 @@ fun calculateOperationInList(input: List<String>, operations: List<String>): Lis
             val op2 = output.removeAt(key + 1).toDouble()
             val operation = output.removeAt(key)
             val op1 = output.removeAt(key - 1).toDouble()
-            val res = perform(op1, operation, op2) ?: throw Exception()
+            val res = perform(op1, operation, op2)
             output.add(key-1, res.toString())
             0
         } else {

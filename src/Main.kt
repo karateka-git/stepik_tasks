@@ -54,8 +54,31 @@ fun callTask3() {
     println(answer.joinToString("\n"){it.joinToString(" + ")})
 }
 
+//fun sequences(k: Int, n: Int, m: Int): Set<List<Int>> = IntRange(1, k).fold(setOf(emptyList())) {
+//    acc, v -> acc.union(sequences(k-1, n, m).map{listOf(v).plus(it)})
+//}
+
+fun sequences(k: Int, n: Int, m: Int): Set<List<Any>> = IntRange(1, k).fold(setOf(emptyList())) {
+    acc, it1 ->
+        println(it1)
+        IntRange(1, k).map{
+            it2 ->
+
+                acc.union(IntRange(1, k).map {
+                listOf(it2, it1, it)
+            })
+    }.get(1)
+}
+
+
     fun main(args: Array<String>) {
 //        callTask1()
 //        callTask2()
-        callTask3()
+//        callTask3()
+        val k = readLine()!!.toInt()
+        val n = readLine()!!.toInt()
+        val m = readLine()!!.toInt()
+        var answer = sequences(k, n, m)
+        println(answer.size)
+        println(answer.joinToString("\n"){it.joinToString(" ")})
     }
